@@ -1,12 +1,12 @@
 <template>
-<nuxt-link :to="'/posts/' +id" class="post-preview"> 
+<nuxt-link :to="postLink" class="post-preview"> 
   <article>
     <div class="post-thumbnail"
      :style="{backgroundImage: 'url(' +thumbnail+')'}"></div>"
     
     <div class="post-content">
       <h1>{{ title }}</h1>
-      <p>{{ previewtext }}</p>
+      <p>{{ previewText }}</p>
     </div>
   </article>
   </nuxt-link>
@@ -22,19 +22,32 @@ export default{
             type: String,
             required:true
         },
+        isAdmin: {
+          type: Boolean,
+        required: false
+        }, 
         title:{
             type: String,
             required: true
         },
-        previewtext:{
+        previewText:{
             type: String,
             required: true
         },
         thumbnail:{
             type: String,
+            required: true        
+        },
+        posts:{
+            type: Array,
             required: true
-        
         }
+    },
+    computed: {
+      postLink() {
+        return this.isAdmin ? '/admin/' + this.id : '/posts/' + this.id
+
+      }
     }
 }
 </script>

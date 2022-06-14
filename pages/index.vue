@@ -3,35 +3,38 @@
 <section class="intro">
   <h1>Get the latest tech news</h1>
 </section>
-<section class="fetured-posts">
-  <PostPreview
-      id="1"
-      thumbnail="https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg"
-      title="Hello there!"
-      previewtext="This is my first part"/>
-  <PostPreview
-      id="2"
-      thumbnail="https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg"
-      title="Hello there again!"
-      previewtext="This is my second part"/>
-  <PostPreview
-      id="3"
-      thumbnail="https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg"
-      title="Hello there thrice!"
-      previewtext="This is my third part"/>
-  </section>
-
+<PostList :posts="loadedPosts"/>
 </div>
 </template>
 
 <script>
-import PostPreview from '@/components/Posts/PostsPreview'
+import PostList from '@/components/Posts/PostList'
 
 export default {
   components: {
-    PostPreview
+    PostList
+  },
+  
+  asyncData(context, callback) {
+    console.log("aysync data!!!!")
+    setTimeout(() => {
+      callback(null, {loadedPosts: [
+        { id:'1', 
+        title:'First Post', 
+        previewText:"This is my first post", 
+        thumbnail:'https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg'
+        },
+        {id:'2', 
+        title:'Second Post', 
+        previewText:"This is my second post", 
+        thumbnail:'https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg'
+        }
+      ] 
+      });
+        
+    },1000);
   }
-}
+};
 </script>
 <style scoped>
 .intro {
