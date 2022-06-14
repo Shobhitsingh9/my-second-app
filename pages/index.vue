@@ -14,11 +14,9 @@ export default {
   components: {
     PostList
   },
-  
-  asyncData(context, callback) {
-    console.log("aysync data!!!!")
-    setTimeout(() => {
-      callback(null, {loadedPosts: [
+  data() {
+    return{
+         loadedPosts: [
         { id:'1', 
         title:'First Post', 
         previewText:"This is my first post", 
@@ -30,9 +28,7 @@ export default {
         thumbnail:'https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg'
         }
       ] 
-      });
-        
-    },1000);
+    };
   }
 };
 </script>

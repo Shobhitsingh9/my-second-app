@@ -37,10 +37,6 @@ export default{
         thumbnail:{
             type: String,
             required: true        
-        },
-        posts:{
-            type: Array,
-            required: true
         }
     },
     computed: {

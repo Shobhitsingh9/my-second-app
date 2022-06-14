@@ -21,7 +21,7 @@ export default {
     console.log("what")
     setTimeout(() => {
      callback(null, {
-       loadedPost: [
+       loadedPost: 
         { id:'1', 
         title:"First Post (ID: " + context.route.params.id +")", 
         previewText:"This is my first post", 
@@ -29,7 +29,7 @@ export default {
         updatedDate: new Date(),
         thumbnail:'https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg'
         }
-       ]
+       
      });
     },1000);
 }

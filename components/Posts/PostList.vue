@@ -24,9 +24,9 @@ export default {
           type: Boolean,
           default: false
       },
-  posts:{
-    type: Array,
-    required: true
+  posts:  {
+      type: Array,
+      required: true
     }
   }
 }
