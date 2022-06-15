@@ -11,12 +11,35 @@ const createStore =() => {
         }
      },
      actions:{
+        nuxtServerInit(vuexContext, context) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    vuexContext.commit('setPosts', [
+                         {
+                             id:'1', 
+                         title:'First Post', 
+                         previewText:"This is my first post", 
+                         thumbnail:'https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg'
+                         },
+                         {id:'2', 
+                         title:'Second Post', 
+                         previewText:"This is my second post", 
+                         thumbnail:'https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg'
+                         }
+                         ])
+                         
+                 resolve();
+                },1000);
+                
+              });
+        },
+
         setPosts(VuexContext,posts) {
-            VuexContext.commit('SetPosts',posts)
+            VuexContext.commit("SetPosts",posts)
         }
      },
      getters: {
-        loadedPosts(state){
+        loadedPosts(state) {
             return state.loadedPosts
         }
      }   

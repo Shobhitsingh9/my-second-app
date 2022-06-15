@@ -14,23 +14,12 @@ export default {
   components: {
     PostList
   },
-  data() {
-    return{
-         loadedPosts: [
-        { id:'1', 
-        title:'First Post', 
-        previewText:"This is my first post", 
-        thumbnail:'https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg'
-        },
-        {id:'2', 
-        title:'Second Post', 
-        previewText:"This is my second post", 
-        thumbnail:'https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg'
-        }
-      ] 
-    };
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts
+    }
   }
-};
+  };
 </script>
 <style scoped>
 .intro {
