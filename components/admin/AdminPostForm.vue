@@ -50,12 +50,12 @@ data() {
     },
     methods: {
          onSave() {
-        console.log(this.editedPost);
+        this.$emit('submit', this.editedPost)
          },
-         oncancel(){
-             this.$router.push('/admin');
+         onCancel(){
+             this.$router.push('/admin')
          }
     }
-}
+};
 </script>
 
