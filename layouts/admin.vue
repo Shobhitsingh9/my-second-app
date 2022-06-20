@@ -12,6 +12,12 @@ export default{
         TheHeader,
         TheSidenav
 },
+computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts
+    }
+},
+
 data() {
     return {
         displaySidenav: false
@@ -19,7 +25,7 @@ data() {
 
 }
 
-}
+};
 
 </script>
 <style>

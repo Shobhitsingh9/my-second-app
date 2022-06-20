@@ -21,7 +21,8 @@ export default {
   props: {
     isAdmin: {
       type: Boolean,
-      default: false
+      required: true
+     // default: true
     },
     posts: {
       type: Array,

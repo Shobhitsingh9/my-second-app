@@ -1,9 +1,9 @@
 <template>
-<div class="admin-new-post-page">
- <section class="new-post-form">
-  <AdminPostForm @submit="onSubmitted"/>
-</section>
-</div>
+  <div class="admin-new-post-page">
+    <section class="new-post-form">
+      <AdminPostForm @submit="onSubmitted" />
+    </section>
+  </div>
 </template>
 
 <script>
@@ -11,18 +11,23 @@ import axios from 'axios'
 import AdminPostForm from "@/components/admin/AdminPostForm";
 
 export default {
-    layout:'admin',
- components: {
-     AdminPostForm
- },
- methods: {
-  onSubmitted(postData) {
-    axios.post('https://nuxt-blog-29b74-default-rtdb.firebaseio.com/posts.json', postData)
-    .then(result => console.log(result))
-    .catch(e => console.log(e))
-
+  layout: 'admin',
+  components: {
+    AdminPostForm
+  },
+  methods: {
+    onSubmitted(postData) {
+      axios.post('https://nuxt-blog-29b74-default-rtdb.firebaseio.com/posts.json', {
+          ...postData,
+          updatedDate: new Date()
+        })
+        .then(result => {
+          this.$router.push("/admin");
+          })
+        .catch(e => console.log(e));
+       
+    }
   }
- }
 };
 </script>
 
@@ -38,3 +43,4 @@ export default {
   }
 }
 </style>
+

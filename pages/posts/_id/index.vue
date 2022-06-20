@@ -1,40 +1,35 @@
 <template>
-<div class="single-post-page">
+  <div class="single-post-page">
     <section class="post">
-        <h1 class="post-title">{{ loadedPost.title }}</h1>
-        <div class="post-details">
-            <div class="post-detail">Last updated on {{  loadedPost.updatedDate }}</div>
-            <div class="post-detail">written by {{ loadedPost.author }}</div>
+      <h1 class="post-title">{{ loadedPost.title }}</h1>
+      <div class="post-details">
+        <div class="post-detail">Last updated on {{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
       <p class="post-content">{{ loadedPost.content }}</p>
-
     </section>
     <section class="post-feedback">
-        <p>Let me know what you think about the post and send a mail to <a href="mailto:feedback@my-awesome-domain.com"></a>.</p>
+      <p>Let me know what you think about the post, send a mail to <a href="mailto:feedback@my-awesome-domain.com">feedback@my-awesome-domain.com</a>.</p>
     </section>
-</div>
+  </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  asyncData(context, callback) {
-    console.log("what")
-    setTimeout(() => {
-     callback(null, {
-       loadedPost: 
-        { id:'1', 
-        title:"First Post (ID: " + context.route.params.id +")", 
-        previewText:"This is my first post", 
-        author: 'shobhit singh',
-        updatedDate: new Date(),
-        thumbnail:'https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg'
+  asyncData(context) {
+    return axios.get('https://nuxt-blog-29b74-default-rtdb.firebaseio.com/posts/' + context.params.id + '.json')
+      .then(res => {
+        return {
+          loadedPost: res.data
         }
-       
-     });
-    },1000);
-}
+      })
+      .catch(e => context.error(e))
+  }
 };
 </script>
+
 
 <style scoped>
 .single-post-page {

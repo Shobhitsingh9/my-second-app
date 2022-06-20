@@ -1,32 +1,44 @@
 <template>
-<div class="admin-post-page">
+  <div class="admin-post-page">
     <section class="update-form">
-     <AdminPostForm :post="loadedPost"/>
+      <AdminPostForm :post="loadedPost" @submit="onSubmitted"/>
     </section>
-</div>
+  </div>
 </template>
 
 <script>
+import axios from 'axios'
 import AdminPostForm from "@/components/admin/AdminPostForm";
 
 export default {
-    layout:'admin',
-    components: {
-        AdminPostForm
-    },
-    data() {
-      return{
-          loadedPost: {
-              author: 'Shobhit Singh',
-              title: 'My awesome Post',
-              content: 'Super amazing,thanks for that!',
-              thumbnailLink:'https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg'
-
-          }
-      }
-
+  layout: 'admin',
+  components: {
+    AdminPostForm
+  },
+  aysncData(context) {
+    return axios
+    .get( 
+      "https://nuxt-blog-29b74-default-rtdb.firebaseio.com/posts/" +
+      context.params.postId +
+      ".json"
+      )
+      .then(res => {
+        return {
+          loadedPost: res.data
+        }
+      })
+      .catch(e => context.error());
+  },
+  methods: {
+    onSubmitted(editedPost) {
+      axios.put("https://nuxt-blog-29b74-default-rtdb.firebaseio.com/posts/" +
+      this.$route.params.postId +
+      ".json", editedPost)
+      .then(res => this.$router.push("/admin"))
+      .catch(e => console.log(e))
     }
-}
+  }
+};
 </script>
 
 <style scoped>
@@ -34,6 +46,7 @@ export default {
   width: 90%;
   margin: 20px auto;
 }
+
 @media (min-width: 768px) {
   .update-form {
     width: 500px;
